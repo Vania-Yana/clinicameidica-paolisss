@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Registrar Consulta</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label>Fecha</label>
+        <input type="date" name="fecha" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Médico</label>
+        <select name="id_medico" class="form-control" required>
+            {% for m in medicos %}
+                <option value="{{ m.id_medico }}">{{ m.nombre }} - {{ m.especialidad }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Paciente</label>
+        <select name="id_paciente" class="form-control" required>
+            {% for p in pacientes %}
+                <option value="{{ p.id_paciente }}">{{ p.nombre }} ({{ p.edad }} años)</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Diagnóstico</label>
+        <textarea name="diagnostico" class="form-control" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label>Tratamiento</label>
+        <textarea name="tratamiento" class="form-control" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('consulta.index') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
